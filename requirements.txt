@@ -1,2 +1,2 @@
+boxsdk==2.0.0a12
 boxsdk[jwt]
-boxsdk>=1.5,<2.0
