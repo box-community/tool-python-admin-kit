@@ -1,6 +1,6 @@
 import sys
 from argparse import ArgumentParser
-from common import authenticate_as_user, walk_folder_tree, folder_str
+from common import authenticate_as_user, walk_folder_tree, path_str
 
 ## Parse command line arguments.
 parser = ArgumentParser(description="Given a Box folder ID and some list of prefix, print the path of any subfolder whose name does not start with one of the prefixes.")
@@ -16,16 +16,14 @@ def audit_name_starts_with(prefixes):
     """
     def action(folder):
         if any(folder.name.startswith(prefix) for prefix in prefixes) == False:
-            print(f"{folder_str(folder)}")
+            print(f"{folder.id}, {path_str(folder)}")
     return action
-
 
 # Authenticate and get client instance
 client = authenticate_as_user(args.config, args.user)
 
+print("FolderId, FolderPath")
 # Get the folder for the given folder ID. This is where we will start our walk.
 root = client.folder(folder_id=args.folder).get()
 # Walk the folder tree, print the path of each folder.
 walk_folder_tree(client, root, audit_name_starts_with(args.prefixes))
-
-print(f"Done!")

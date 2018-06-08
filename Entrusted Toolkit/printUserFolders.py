@@ -1,6 +1,6 @@
 import sys
 from argparse import ArgumentParser
-from common import authenticate_as_user, walk_folder_tree, folder_str
+from common import authenticate_as_user, walk_folder_tree, path_str
 
 ## Parse command line arguments.
 parser = ArgumentParser(description="Given a Box folder ID, log the ID and path of that folder and every subfolder.")
@@ -13,14 +13,13 @@ def print_path(folder):
     """
     Given a folder, log the full path.
     """
-    print(f"{folder_str(folder)}")
+    print(f"{folder.id}, {path_str(folder)}")
 
 # Authenticate and get client instance
 client = authenticate_as_user(args.config, args.user)
 
+print("FolderId, FolderPath")
 # Get the folder for the given folder ID. This is where we will start our walk.
 root = client.folder(folder_id=args.folder).get()
 # Walk the folder tree, print the path of each folder.
 walk_folder_tree(client, root, print_path)
-
-print(f"Done!")

@@ -5,7 +5,7 @@ from argparse import ArgumentParser
 from common import authenticate_as_service_account, walk_folder_tree, path_str
 
 ## Parse command line arguments.
-parser = ArgumentParser(description="Given a list of Box usernames, find the primary login / email address.")
+parser = ArgumentParser(description="Given a list of Box usernames, print the primary login (email address).")
 parser.add_argument("-f", "--file", dest="file", required=True, help="path to the file containing the usernames to look up, one per line.", metavar="PATH")
 parser.add_argument("-c", "--config", dest="config", required=True, help="path to the JSON file containing your JWT authorization configuration. For formatting information, see: https://developer.box.com/docs/setting-up-a-jwt-app#section-use-an-application-config-file", metavar="PATH")
 args = parser.parse_args()
