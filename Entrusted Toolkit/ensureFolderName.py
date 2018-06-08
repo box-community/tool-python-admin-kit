@@ -9,9 +9,10 @@ parser.add_argument("-f", "--folder", dest="folder", required=True, help="ID of 
 parser.add_argument("-u", "--user",   dest="user",   required=True, help="ID of the user that owns or has write permissions on the folder", metavar="USER_ID")
 parser.add_argument("-p", "--prefix", dest="prefix", required=True, help="the string prefix ", metavar="PREFIX")
 parser.add_argument("-c", "--config", dest="config", required=True, help="path to the JSON file containing your JWT authorization configuration. For formatting information, see: https://developer.box.com/docs/setting-up-a-jwt-app#section-use-an-application-config-file", metavar="PATH")
+parser.add_argument("-v", "--verbose", dest="verbose", action="store_true", help="print verbose log messages to console")
 args = parser.parse_args()
 
-def ensure_name_starts_with(client, prefix, verbose=False):
+def ensure_name_starts_with(client, prefix, verbose):
     """
     Given a client and prefix, returns a function that takes a folder and updates its name to match the prefix.
     """
@@ -31,5 +32,7 @@ root = client.folder(folder_id=args.folder).get()
 print(f"Walking {folder_str(root)}")
 
 # Walk the folder tree, renaming each folder as necessary.
-folder_action = ensure_name_starts_with(client, args.prefix, True)
+folder_action = ensure_name_starts_with(client, args.prefix, args.verbose)
 walk_folder_tree(client, root, folder_action)
+
+print(f"Done!")
