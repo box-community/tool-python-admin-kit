@@ -32,13 +32,6 @@ def path_str(folder):
         path = "/" + "/".join(map(lambda p: p['name'], folder.path_collection['entries'])) + "/"
     return path + folder.name
 
-def folder_str(folder):
-    """
-    Returns a string with the folder's ID and full path
-    """
-    return f"{str(folder.id).rjust(16)} {path_str(folder)}"
-
-
 ## TREE TRAVERSAL
 
 def is_folder(item):
@@ -63,12 +56,10 @@ def get_subfolders(client, folder):
         lastFetchedCount = len(items)
     return result
 
-def walk_folder_tree(client, folder, folder_action, verbose=False):
+def walk_folder_tree(client, folder, folder_action):
     """
     Perform some folder_action against a folder, then do the same for every subfolder.
     """
-    if (verbose):
-        print(folder_str(folder))
     folder_action(folder)
     for subfolder in get_subfolders(client, folder):
         walk_folder_tree(client, subfolder, folder_action)
