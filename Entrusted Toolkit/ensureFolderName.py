@@ -1,5 +1,4 @@
 import sys
-from boxsdk import JWTAuth, Client
 from argparse import ArgumentParser
 from common import authenticate_as_user, walk_folder_tree, folder_str
 
