@@ -1,2 +1,3 @@
 boxsdk==2.0.0a12
 boxsdk[jwt]
+joblib

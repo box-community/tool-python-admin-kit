@@ -8,6 +8,7 @@ These script enable admins to scan and modify institutional data in 'entrusted' 
 | [ensureFolderName](#ensureFolderName) | Ensure that all subfolder names start with a specified prefix |
 | [auditFolderName](#auditFolderName) | Print the path of any subfolder whose name does not start with a specified prefix |
 | [printFolderCollaborators](#printFolderCollaborators) | Print the collaborations on a given folder and all subfolders  |
+| [printPrimaryLogin](#printPrimaryLogin) | Print the primary login (email address) for a given list of usernames  |
 
 
 ## printUserFolders
@@ -97,4 +98,26 @@ FolderId, FolderPath, CollaborationId, CollaborationRole, CollaborationCreated, 
 12345, "/All Files/My Files", 98765, editor, 2017-12-18T12:52:03-08:00, 112233, "User Foo", foo@iu.edu, 223344, "Collab Creator", creator@iu.edu
 12346, "/All Files/My Files", 98765, editor, 2017-12-18T12:52:03-08:00, 112244, "User Bar", bar@iu.edu, 223344, "Collab Creator", creator@iu.edu
 12347, "/All Files/My Files/data", 98766, editor, 2017-12-31T00:00:00-08:00, 12255, "User Baz", baz@iu.edu, 223344, "Collab Creator", creator@iu.edu
+```   
+
+## printPrimaryLogin
+
+Given a list of Box usernames, print the primary login (email address).
+
+### Usage
+
+`printPrimaryLogin -f 'PATH_TO_USER_FILE' -a 'PATH_TO_AUTH_CONFIG_JSON'`
+
+### Example
+
+`printUserFolders -f ~/Documents/usernames.txt -a ~/Documents/Box_Jwt_Config.json`
+
+Output:
+
+```
+Username, PrimaryLogin
+foo, foo@iu.edu
+bar, bar@iu.edu
+baz, baz@iu.edu
+zzz, (user not found)
 ```   
