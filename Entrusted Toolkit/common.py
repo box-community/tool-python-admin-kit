@@ -3,32 +3,21 @@ from boxsdk import JWTAuth, Client
 
 ## AUTHENTICATION 
 
-def get_client(jwtAuth):
-    """
-    Get a client instance with the specified JWTAuth. Log the authenticated user.
-    """
-    client = Client(jwtAuth)
-    me = client.user().get()
-    print (f"Authenticated as {me.name} ({me.login}).")
-    return client
-
 def authenticate_as_user(config, user):
     """
     Using the JWT auth configuration file, get an authenticated client that can act as the specified user. 
     """
     auth = JWTAuth.from_settings_file(config)
-    print ("Authenticating...")
     auth.authenticate_user(user)
-    return get_client(auth);
+    return Client(auth);
 
 def authenticate_as_service_account(config):
     """
     Using the JWT auth configuration file, get an authenticated client that can act as the app service account. 
     """
     auth = JWTAuth.from_settings_file(config)
-    print ("Authenticating...")
     auth.authenticate_instance()
-    return get_client(auth);
+    return Client(auth);
 
 
 ## STRING FUNCTIONS
