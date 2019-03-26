@@ -1,4 +1,3 @@
-import sys
 from boxsdk import JWTAuth, Client
 
 ## AUTHENTICATION 
@@ -39,6 +38,29 @@ def is_folder(item):
     Check the item's 'type' to determine whether it's a folder.
     """
     return item['type'] == "folder"
+
+def is_file(item):
+    """
+    Check the item's 'type' to determine whether it's a file.
+    """
+    return item['type'] == "file"
+
+def do_for_folder_items(client, folder_id, fn):
+    """
+    Fetch all items in a given folder
+    """
+    offset = 0
+    hasMoreItems = True
+    result = []
+    while (hasMoreItems):
+        # fetch folder items and add subfolders to list
+        items = client.folder(folder_id=folder_id).get_items(limit=100, offset=offset)
+        item_list = list(items)
+        # pass the items to the provided function.
+        fn(client, item_list)
+        # update offset and counts for terminating conditions.
+        offset += len(item_list)
+        hasMoreItems = len(item_list) != 0
 
 def get_subfolders(client, folder):
     """
