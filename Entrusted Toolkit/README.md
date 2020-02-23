@@ -9,6 +9,7 @@ These script enable admins to scan and modify institutional data in 'entrusted' 
 | [auditFolderName](#auditFolderName) | Print the path of any subfolder whose name does not start with a specified prefix |
 | [printFolderCollaborators](#printFolderCollaborators) | Print the collaborations on a given folder and all subfolders  |
 | [printPrimaryLogin](#printPrimaryLogin) | Print the primary login (email address) for a given list of usernames  |
+| [createSharedLink](#createSharedLink) | Create a time-limited, non-vanity shared link for every file in a given folder  |
 
 
 ## printUserFolders
@@ -120,4 +121,24 @@ foo, foo@iu.edu
 bar, bar@iu.edu
 baz, baz@iu.edu
 zzz, (user not found)
+```   
+
+## createSharedLink
+
+Given a Box folder ID, create a shared link with the specified expiration (in days) for all files in the folder.
+
+### Usage
+
+`python3 createSharedLink.py -f FOLDER_ID -e EXPIRATION_IN_DAYS -a PATH_TO_AUTH_CONFIG_JSON`
+
+### Example
+
+`python3 createSharedLink.py -f 1234 -e 30 -a ~/Documents/Box_Jwt_Config.json`
+
+Output:
+
+```
+File Name, Shared Link
+foo.txt, https://domain.box.com/s/abcd1234
+bar.txt, https://domain.box.com/s/wxyz0987
 ```   
