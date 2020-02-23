@@ -25,12 +25,12 @@ def create_shared_link(client, items):
     for item in filter(is_file, items):
         # Create a shared link with the specified expiration, 
         #   or update the existing shared link.
-        url = client.file(item.id).get_shared_link(unshared_at=expiration)
+        url = client.file(item.id).get_shared_link(access="company", unshared_at=expiration)
         # Print CSV row
-        print(f'{item.name}, {url}')
+        print(f'{item.name},{url}')
 
 # Print CSV header
-print("File Name, Shared Link")
+print("file,link")
 # Pass the client, folder id, and create_shared_link function
 #   to do_for_folder_items, which will page through all the items
 #   in the folder and pass each page of items to the function.

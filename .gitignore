@@ -99,3 +99,5 @@ ENV/
 
 # mypy
 .mypy_cache/
+.DS_Store
+Entrusted Toolkit/__init__.py

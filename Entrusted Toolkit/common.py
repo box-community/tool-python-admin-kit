@@ -51,7 +51,6 @@ def do_for_folder_items(client, folder_id, fn):
     """
     offset = 0
     hasMoreItems = True
-    result = []
     while (hasMoreItems):
         # fetch folder items and add subfolders to list
         items = client.folder(folder_id=folder_id).get_items(limit=100, offset=offset)
